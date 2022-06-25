@@ -1,12 +1,23 @@
 library(tidycensus)
-library(tidyverse)
+library(stringr)
+library(ggplot2)
 library(viridis)
 library(tigris)
 
-states <- data.frame(state.abb,state.name)
+options(tigris_use_cache = TRUE)
+options(scipen = 100)
 
-survey = 'acs5'
+survey = 'acs5/profile'
 year = 2020
+
+# Clean up from last run
+if (file.exists("census.png")) {
+  file.remove("census.png")
+}
+
+if (file.exists("caption.txt")) {
+  file.remove("caption.txt")
+}
 
 create_random_visualization <- function(year,survey) {
   vars <- load_variables(year, survey, cache = TRUE)
@@ -25,9 +36,10 @@ create_random_visualization <- function(year,survey) {
   clean_subtitle <- str_to_sentence(random_var$concept)
   clean_subtitle <- gsub("Acs","ACS",clean_subtitle)
   
-  clean_subtitle <- paste(clean_subtitle,"-",random_var$name)
+  clean_subtitle <- paste("2016-2020",clean_subtitle,"-",random_var$name)
   
   message(paste("Now visualizing:", clean_label))
+  
   visualization <- ggplot(census_data,aes(fill = estimate)) +
     geom_sf(color = NA) +
     scale_fill_viridis(option = random_color) +
@@ -36,5 +48,14 @@ create_random_visualization <- function(year,survey) {
          subtitle = clean_subtitle,
          caption = "Random Census Visualizations | By Gavin Rozzi (@gavroz)")
 
+  fileConn <- file("caption.txt")
+  writeLines(clean_label, fileConn)
+  close(fileConn)
+  
   return(visualization)
 }
+
+create_random_visualization(year,survey)
+
+ggsave("census.png",width = 14, height = 7)
+
