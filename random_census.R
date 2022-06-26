@@ -59,3 +59,4 @@ create_random_visualization(year,survey)
 
 ggsave("census.png",width = 14, height = 7)
 
+
