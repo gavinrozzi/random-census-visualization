@@ -26,7 +26,7 @@ create_random_visualization <- function(year,survey) {
   
   random_color <- sample(LETTERS[1:7],1)
 
-  census_data <- get_acs(geography = "state", variables = random_var$name, geometry = TRUE) %>%
+  census_data <- get_acs(geography = "state", variables = random_var$name, geometry = TRUE, key = Sys.getenv("CENSUS_API_KEY")) %>%
     shift_geometry()
   
   clean_label <- str_split(random_var$label, "!!")[[1]]
