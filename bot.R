@@ -9,7 +9,9 @@ source("random_census.R")
 # Create a token for authenticating to Twitter
 auth <- create_token(app = "randomcensus",
                    consumer_key = Sys.getenv("TWITTER_CONSUMER_API_KEY"),
-                   consumer_secret = Sys.getenv("TWITTER_CONSUMER_API_SECRET")
+                   consumer_secret = Sys.getenv("TWITTER_CONSUMER_API_SECRET"),
+                   access_token = Sys.getenv("TWITTER_ACCESS_TOKEN"),
+                   access_secret = Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET")
                   )
 
 
