@@ -1,6 +1,5 @@
 library(rtweet, warn.conflicts = F, quietly = T)
 library(dplyr, warn.conflicts = F, quietly = T)
-library(lubridate, warn.conflicts = F, quietly = T)
 
 # Read Twitter API credentials- LOCAL MACHINE ONLY
 # readRenviron(".env")
