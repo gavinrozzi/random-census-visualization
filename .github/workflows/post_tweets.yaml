@@ -8,7 +8,7 @@ name: Post Tweets
 
 jobs:
   render:
-    name: Reply to Twitter Mentions
+    name: Post Visualizations
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
