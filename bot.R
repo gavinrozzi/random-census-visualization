@@ -18,4 +18,4 @@ auth <- create_token(app = "randomcensus",
 caption = readLines("caption.txt")
 alt_text <- c(paste("A map of the United States showing",caption,"from the Census American Community Survey"))
 
-post_tweet(token = auth, status = caption, media = paste0(getwd(),"/",file.path("census.png")))
+post_tweet(token = auth, status = caption, media = paste0(getwd(),"/",file.path("census.png")), media_alt_text = alt_text)
